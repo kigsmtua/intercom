@@ -9,7 +9,7 @@ class CalculateCustomerWithinDistanceTest(unittest.TestCase):
         customers = read_data_from_file("testcustomers.txt")
         customers_within_range = calculate_distances_to_customer_locations(customers)
 
-        # Distances we've calculated to more than 100kms
+        # Distances we've calculated to less than 100kms
         expected_customer_list = [{'latitude': '53.2451022', 'user_id': 4,
                                   'name': 'Ian Kehoe', 'longitude': '-6.238335'}, {'latitude': '53.1302756',
                                   'user_id': 5, 'name': 'Nora Dempsey', 'longitude': '-6.2397222'}]
