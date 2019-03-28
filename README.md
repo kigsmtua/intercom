@@ -27,4 +27,7 @@ There is also included a docker container that can be executed if  you lack an u
 # How to execute
 >. Running the code.
 
-The code can be executed by running ```python main.py ``` on a machine that has python 3 installed code is executed from the src directory where the code is located
+cd into the src directory and execute ``` python main.py ``` </br>
+
+Using docker I have pushed an image to repository `kigsmtua/intercom` based on the dockerfile in this repository so the code can be execueted by running
+```dockerr run kigsmtua/intercom```
