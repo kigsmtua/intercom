@@ -31,3 +31,8 @@ cd into the src directory and execute ``` python main.py ``` </br>
 
 Using docker I have pushed an image to repository `kigsmtua/intercom` based on the dockerfile in this repository so the code can be execueted by running
 ```docker run kigsmtua/intercom```
+
+
+# Running tests
+
+cd into the src directory and execute ```python test.py```
