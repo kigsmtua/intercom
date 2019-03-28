@@ -1,7 +1,8 @@
 import json
 from math import radians, sin, cos, asin, sqrt
 
-from config import OFFICE_LATITUDE, OFFICE_LONGITUDE, RADIUS_WITHIN_OFFICE
+from config import (OFFICE_LATITUDE, OFFICE_LONGITUDE,
+                    RADIUS_WITHIN_OFFICE, CUSTOMER_FILE_NAME)
 
 
 def read_data_from_file(file_to_read):
@@ -82,7 +83,7 @@ def execute():
     """
         Main method, computes the customers within 100kms of the office
     """
-    customer_data = read_data_from_file("customers.txt")
+    customer_data = read_data_from_file(CUSTOMER_FILE_NAME)
     print(calculate_distances_to_customer_locations(customer_data))
 
 
