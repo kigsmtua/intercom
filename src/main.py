@@ -74,7 +74,6 @@ def calculate_distances_to_customer_locations(customer_data):
         distance_to_point  = calculate_distance_between_coordinates((latitude, longitude)) # noqa
         # Check to see whether customer is within the 100km radius inclusive
         if distance_to_point <= RADIUS_WITHIN_OFFICE:
-            print(distance_to_point)
             customer_within_radius.append(customer)
     return sort_list_of_dictionary_by_key(customer_within_radius, 'user_id')
 
