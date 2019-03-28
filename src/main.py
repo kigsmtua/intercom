@@ -1,6 +1,7 @@
 import json
-from copy import deepcopy
 from math import radians, sin, cos, asin, sqrt
+
+from config import OFFICE_LATITUDE, OFFICE_LONGITUDE, RADIUS_WITHIN_OFFICE
 
 
 def read_data_from_file(file_to_read):
@@ -24,14 +25,14 @@ def calculate_distance_between_coordinates(coords):
 
      a = sin²(φB - φA/2) + cos φA * cos φB * sin²(λB - λA/2)
      c = 2 * atan2( √a, √(1−a) )
-     R = 6371 km (radius of the earth)
+     R = 6371 km (radius of the earth) * c
 
      coordinates - set containing the coordinates to
                    compute distance to from office
     """
 
-    office_latitude = radians(53.339428)
-    office_longitude = radians(-6.257664)
+    office_latitude = radians(OFFICE_LATITUDE)
+    office_longitude = radians(OFFICE_LONGITUDE)
 
     loc_b_latitude, loc_b_longitude = map(radians, [coords[0], coords[1]])
 
@@ -51,20 +52,40 @@ def calculate_distance_between_coordinates(coords):
     return distance_in_km
 
 
-# This is what happens when the values that come alongs
-def find_distances_to_locations(list_of_data):
-    # We can consume all values that come here as hallucinogens
-    # The values come along as the importance of sort items here
-    items = []
-    for data in list_of_data:
-        latitude = float(data['latitude'])
-        longitude = float(data['longitude'])
+def sort_list_of_dictionary_by_key(list, sort_key):
+    """
+        Given a list of dictionary sort the items in the dictionary based on
+        A specified key
+    """
+
+    sorted_list = sorted(list, key=lambda k: k[sort_key])
+    return sorted_list
+
+
+def calculate_distances_to_customer_locations(customer_data):
+    """
+      Given customer locations, compute the distance between the customers
+      returns list of customers who are within a given range
+    """
+    customer_within_radius = []
+    for customer in customer_data:
+        latitude = float(customer['latitude'])
+        longitude = float(customer['longitude'])
         distance_to_point  = calculate_distance_between_coordinates((latitude, longitude)) # noqa
-        if distance_to_point <= 100:
-            items.append(data)
+        # Check to see whether customer is within the 100km radius inclusive
+        if distance_to_point <= RADIUS_WITHIN_OFFICE:
+            print(distance_to_point)
+            customer_within_radius.append(customer)
+    return sort_list_of_dictionary_by_key(customer_within_radius, 'user_id')
 
-    return items
+
+def execute():
+    """
+        Main method, computes the customers within 100kms of the office
+    """
+    customer_data = read_data_from_file("customers.txt")
+    print(calculate_distances_to_customer_locations(customer_data))
 
 
-file_contents = read_data_from_file("customers.txt")
-print(find_distances_to_locations(file_contents))
+if __name__ == "__main__":
+    execute()
