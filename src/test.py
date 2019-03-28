@@ -5,7 +5,7 @@ import config
 
 class CalculateCustomerWithinDistanceTest(unittest.TestCase):
 
-    def test_only_within_range_names_are_produced(self):
+    def test_only_customers_within_range_are_produced(self):
         customers = read_data_from_file("testcustomers.txt")
         customers_within_range = calculate_distances_to_customer_locations(customers)
 
@@ -31,6 +31,7 @@ class CalculateCustomerWithinDistanceTest(unittest.TestCase):
 
         sorted_list = sort_list_of_dictionary_by_key(unsorted_list, 'user_id')
         self.assertEqual(sorted_list,  expected_list)
+
 
 if __name__ == '__main__':
     unittest.main()
