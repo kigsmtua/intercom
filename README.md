@@ -1,5 +1,8 @@
 # Intercom
-Given a list of customers in a text file, Write a program that will read the full list of customers and output the names and user ids of matching customers (within 100km), sorted by User ID (ascending).
+Given a list of customers in a text file, Write a program that will read the full list of customers and output the names and user ids of matching customers (within 100km), sorted by User ID (ascending).</br>
+
+
+All code is located in the src directory
 
 # How
 
