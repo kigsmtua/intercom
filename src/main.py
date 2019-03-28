@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from math import radians, sin, cos, asin, sqrt
 
 
@@ -50,14 +51,20 @@ def calculate_distance_between_coordinates(coords):
     return distance_in_km
 
 
+# This is what happens when the values that come alongs
 def find_distances_to_locations(list_of_data):
+    # We can consume all values that come here as hallucinogens
+    # The values come along as the importance of sort items here
+    items = []
     for data in list_of_data:
         latitude = float(data['latitude'])
         longitude = float(data['longitude'])
         distance_to_point  = calculate_distance_between_coordinates((latitude, longitude)) # noqa
-        print(distance_to_point)
+        if distance_to_point <= 100:
+            items.append(data)
+
+    return items
 
 
-# This is the otk
 file_contents = read_data_from_file("customers.txt")
-find_distances_to_locations(file_contents)
+print(find_distances_to_locations(file_contents))
